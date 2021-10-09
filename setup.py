@@ -7,7 +7,7 @@ def readme():
 
 setup(
     name="consoledraw",
-    version="2.0.2",
+    version="2.2.0",
     description="A python module to update the console without flashing.",
     long_description=readme(),
     long_description_content_type="text/markdown",
