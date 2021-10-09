@@ -24,20 +24,34 @@ class Console:
         
         self.update()
     
+    def __enter__(self, *args, **kwargs):
+        self.clear()
+
+    def __exit__(self, *args, **kwargs):
+        self.update()
+
     def write(self, text: str) -> None:
+        "Writes to the console (use Console.print if you want this to behave like python's built-in print function)."
+
         self.text += text
 
     def print(self, *args, **kwargs) -> None:
+        "Prints to the console (behaves like python's built-in print function)."
+
         if "file" in kwargs:
             kwargs.pop("file")
         print(*args, **kwargs, file=self)
     
     def clear(self) -> None:
+        "Clears the console's buffer."
+
         self.lastText = self.text.rstrip()
         self.text = ""
         print(end="\033[0;0f")
 
     def update(self) -> None:
+        "Prints the console's buffer to the actual console."
+
         self.text = self.text.rstrip()
 
         grid = []
@@ -54,6 +68,8 @@ class Console:
                 x = 0
                 y += 1
             else:
+                if y >= len(grid) or x >= len(grid[0]):
+                    raise ValueError("The console is too small to display the buffer.")
                 grid[y][x] = char
                 if (x := x + 1) == size.columns:
                     x = 0
