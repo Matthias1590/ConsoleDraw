@@ -1,4 +1,4 @@
-Have you ever tried updating the terminal with text that changes multiple times a second? Remember how when you tried clearing the console with os.system calls it would make the console flash and make the text unreadable? I wrote this python module to prevent exactly that.
+Have you ever tried updating the terminal with text that changes multiple times a second? Remember how when you tried clearing the console with os.system calls it would make the console flash and make the text unreadable? I wrote this python module to prevent exactly that. Introducing...
 
 # ConsoleDraw
 A python module to update the console without flashing.
