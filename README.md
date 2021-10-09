@@ -7,7 +7,7 @@ A python module to update the console without flashing.
 The consoledraw module should be supported on Windows, Linux and Mac (although it has not been tested on Mac).
 
 # Installation
-This consoledraw module can be installed using pip.
+The consoledraw module can be installed using pip.
 ```
 pip install consoledraw
 ```
