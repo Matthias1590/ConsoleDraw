@@ -29,7 +29,7 @@ jobs:
         run: python3 setup.py build
         
       - name: Install package
-        run: python3 setup.py install
+        run: sudo python3 setup.py install
       
       - name: Twine upload
         run: twine upload dist/* ${{ secrets.TWINE_LOGIN }}
