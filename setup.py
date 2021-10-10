@@ -5,6 +5,7 @@ def readme():
     with open("README.md", "r") as f:
         return f.read()
 
+
 setup(
     name="consoledraw",
     version="2.3.2",
