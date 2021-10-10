@@ -10,28 +10,16 @@ if os.name == "nt":
         _fields_ = [("size", ctypes.c_int), ("visible", ctypes.c_byte)]
 
     def setCursorVisibility(visible: bool) -> None:
-        if not visible:
-            ci = _CursorInfo()
-            handle = ctypes.windll.kernel32.GetStdHandle(-11)
-            ctypes.windll.kernel32.GetConsoleCursorInfo(
-                handle, ctypes.byref(ci))
-            ci.visible = False
-            ctypes.windll.kernel32.SetConsoleCursorInfo(
-                handle, ctypes.byref(ci))
-        else:
-            ci = _CursorInfo()
-            handle = ctypes.windll.kernel32.GetStdHandle(-11)
-            ctypes.windll.kernel32.GetConsoleCursorInfo(
-                handle, ctypes.byref(ci))
-            ci.visible = True
-            ctypes.windll.kernel32.SetConsoleCursorInfo(
+        ci = _CursorInfo()
+        handle = ctypes.windll.kernel32.GetStdHandle(-11)
+        ctypes.windll.kernel32.GetConsoleCursorInfo(
+            handle, ctypes.byref(ci))
+        ci.visible = visible
+        ctypes.windll.kernel32.SetConsoleCursorInfo(
                 handle, ctypes.byref(ci))
 else:
     def setCursorVisibility(visible: bool) -> None:
-        if not visible:
-            print("\x1b[?25l")
-        else:
-            print("\x1b[?25h")
+        print("\x1b[?25l" if visible else "\x1b[?25h")
 
 
 class Console:
