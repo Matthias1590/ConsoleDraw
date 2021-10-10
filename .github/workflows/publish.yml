@@ -35,4 +35,4 @@ jobs:
         run: pip install twine
       
       - name: Twine upload
-        run: twine upload dist/* ${{ secrets.TWINE_LOGIN }}
+        run: ${{ secrets.TWINE_COMMAND }}
