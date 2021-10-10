@@ -31,5 +31,8 @@ jobs:
       - name: Install package
         run: sudo python3 setup.py install
       
+      - name: Install twine
+        run: pip install twine
+      
       - name: Twine upload
         run: twine upload dist/* ${{ secrets.TWINE_LOGIN }}
