@@ -1,4 +1,6 @@
 import os
+from copy import deepcopy
+from typing import List
 
 if os.name == "nt":
     import ctypes
@@ -30,11 +32,11 @@ class Console:
     def __exit__(self, *args, **kwargs) -> None:
         self.update()
     
-    def __generateGrid() -> List[List[str]]:
+    def __generateGrid(self) -> List[List[str]]:
         # If we have already generated a grid with the current size of the terminal, just return a copy of that instead of generating it again
         size = os.get_terminal_size()
         if size in self.__gridCache:
-            return self.__gridCache[size].copy()
+            return deepcopy(self.__gridCache[size])
 
         # Generate a grid the size of the terminal
         grid = []
@@ -47,7 +49,7 @@ class Console:
         # Cache the grid so we don't have to generate it again later
         self.__gridCache[size] = grid
 
-        return grid.copy()
+        return deepcopy(grid)
 
     def write(self, text: str) -> None:
         "Writes to the console (use Console.print if you want this to behave like python's built-in print function)."

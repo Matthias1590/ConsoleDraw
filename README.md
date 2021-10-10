@@ -24,13 +24,13 @@ console = consoledraw.Console()
 
 x = 0
 while True:
-    with console:    
+    with console:
         for i in range(23):
             console.print("    |" + " " * round(abs(sin((x + i) * 0.05)) * 9.5) + "O") # Prints to the custom console's buffer (works the same as python's built-in print)
     
     x += 1
 
-    sleep(1/60) 
+    sleep(1/60)
 ```
 ![Demo GIF](https://media0.giphy.com/media/gXfAUJAD8hHwBcJIFP/giphy.gif?cid=790b7611aab0b776e0e3796d1e0e0e60f7012fc4300d0b9e&rid=giphy.gif&ct=g)
 
