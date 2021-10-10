@@ -21,7 +21,7 @@ class Console:
                 ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
                 ci.visible = False
                 ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
-            elif os.name == "posix":
+            else:
                 print("\x1b[?25l")
         
         self.update()
