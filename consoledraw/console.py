@@ -9,29 +9,47 @@ if os.name == "nt":
     class _CursorInfo(ctypes.Structure):
         _fields_ = [("size", ctypes.c_int), ("visible", ctypes.c_byte)]
 
+    def setCursorVisibility(visible: bool) -> None:
+        if not visible:
+            ci = _CursorInfo()
+            handle = ctypes.windll.kernel32.GetStdHandle(-11)
+            ctypes.windll.kernel32.GetConsoleCursorInfo(
+                handle, ctypes.byref(ci))
+            ci.visible = False
+            ctypes.windll.kernel32.SetConsoleCursorInfo(
+                handle, ctypes.byref(ci))
+        else:
+            ci = _CursorInfo()
+            handle = ctypes.windll.kernel32.GetStdHandle(-11)
+            ctypes.windll.kernel32.GetConsoleCursorInfo(
+                handle, ctypes.byref(ci))
+            ci.visible = True
+            ctypes.windll.kernel32.SetConsoleCursorInfo(
+                handle, ctypes.byref(ci))
+else:
+    def setCursorVisibility(visible: bool) -> None:
+        if not visible:
+            print("\x1b[?25l")
+        else:
+            print("\x1b[?25h")
+
+
 class Console:
     def __init__(self, hideCursor: bool = True) -> None:
         self.text = ""
         self.__gridCache = {}
 
         if hideCursor:
-            if os.name == "nt":
-                ci = _CursorInfo()
-                handle = ctypes.windll.kernel32.GetStdHandle(-11)
-                ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
-                ci.visible = False
-                ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
-            else:
-                print("\x1b[?25l")
-        
+            setCursorVisibility(False)
+
         self.update()
-    
+
     def __enter__(self, *args, **kwargs) -> None:
         self.clear()
 
     def __exit__(self, *args, **kwargs) -> None:
         self.update()
-    
+
     def __generateGrid(self) -> List[List[str]]:
         # If we have already generated a grid with the current size of the terminal, just return a copy of that instead of generating it again
         size = os.get_terminal_size()
@@ -45,7 +63,7 @@ class Console:
             for _ in range(size.columns):
                 row.append(" ")
             grid.append(row)
-        
+
         # Cache the grid so we don't have to generate it again later
         self.__gridCache[size] = grid
 
@@ -63,7 +81,7 @@ class Console:
         if "file" in kwargs:
             kwargs.pop("file")
         print(*args, **kwargs, file=self)
-    
+
     def clear(self) -> None:
         "Clears the console's buffer."
 
@@ -87,7 +105,8 @@ class Console:
                 y += 1
             else:
                 if y > maxY or x > maxX:
-                    raise ValueError("The console is too small to display the buffer.")
+                    raise ValueError(
+                        "The console is too small to display the buffer.")
                 grid[y][x] = char
                 if x == maxX:
                     x = 0
