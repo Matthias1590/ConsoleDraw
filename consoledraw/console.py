@@ -19,7 +19,7 @@ if os.name == "nt":
                 handle, ctypes.byref(ci))
 else:
     def setCursorVisibility(visible: bool) -> None:
-        print("\x1b[?25l" if visible else "\x1b[?25h")
+        print("\x1b[?25h" if visible else "\x1b[?25l")
 
 
 class Console:
