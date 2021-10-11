@@ -37,5 +37,8 @@ jobs:
       - name: Twine upload
         run: twine upload dist/* -u Matthias1590 -p ${{ secrets.TWINE_PASSWORD }}
         
-      - name: Download package
+      - name: Uninstall package
+        run: pip uninstall consoledraw -y
+        
+      - name: Download and install package
         run: pip install consoledraw --upgrade
