@@ -38,4 +38,4 @@ jobs:
         run: twine upload dist/* -u Matthias1590 -p ${{ secrets.TWINE_PASSWORD }}
         
       - name: Download package
-        run: pip install consoledraw
+        run: pip install consoledraw --upgrade
