@@ -16,5 +16,6 @@ setup(
     author="Matthias Wijnsma",
     author_email="matthiasx95@gmail.com",
     license="MIT",
+    python_requires=">=3.6",
     packages=["consoledraw"]
 )
