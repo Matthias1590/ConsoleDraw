@@ -32,13 +32,13 @@ jobs:
         run: sudo python3 setup.py install
       
       - name: Install twine
-        run: py -m pip install twine
+        run: python3 -m pip install twine
       
       - name: Twine upload
         run: twine upload dist/* -u Matthias1590 -p ${{ secrets.TWINE_PASSWORD }}
         
       - name: Uninstall package
-        run: py -m pip uninstall consoledraw -y
+        run: python3 -m pip uninstall consoledraw -y
         
       - name: Download and install package
-        run: py -m pip install consoledraw
+        run: python3 -m pip install consoledraw
