@@ -3,9 +3,6 @@ Have you ever tried updating the console with text that changes multiple times a
 # ConsoleDraw
 A python module to update the console without flashing.
 
-# Supported Operating Systems
-The consoledraw module should be supported on Windows, Linux and Mac (although it has not been tested on Mac).
-
 # Installation
 The consoledraw module can be installed using pip.
 ```
@@ -57,3 +54,9 @@ console.print("Another message!")
 
 console.update()
 ```
+
+# Downloads
+[![Downloads](https://pepy.tech/badge/consoledraw)](https://pepy.tech/project/consoledraw) [![Downloads](https://pepy.tech/badge/consoledraw/month)](https://pepy.tech/project/consoledraw) [![Downloads](https://pepy.tech/badge/consoledraw/week)](https://pepy.tech/project/consoledraw)
+
+# Supported Operating Systems
+The consoledraw module should be supported on Windows, Linux and Mac (although it has not been tested on Mac).
