@@ -11,9 +11,14 @@ The consoledraw module can be installed using pip.
 ```
 pip install consoledraw
 ```
-If this doesn't work, try this instead
+If that doesn't work, try this instead.
 ```
 pip install git+https://github.com/Matthias1590/ConsoleDraw.git
+```
+Or, if you want to, you can clone the repo and run the following commands.
+```
+python3 setup.py build
+python3 setup.py install
 ```
 
 # Demo
