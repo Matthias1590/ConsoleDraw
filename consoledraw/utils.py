@@ -14,8 +14,14 @@ if os.name == "nt":
         ci.visible = visible
         ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
 
+    def clear_screen() -> None:
+        os.system("cls")
+
 
 else:
 
     def set_cursor_visibility(visible: bool) -> None:
         print("\x1b[?25h" if visible else "\x1b[?25l")
+
+    def clear_screen() -> None:
+        print("\x1b[2J\x1b[H")

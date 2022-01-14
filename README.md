@@ -19,26 +19,27 @@ python3 setup.py install
 ```
 
 # Demo
-demo.py:
+example.py:
 ```python
-from math import sin
+from consoledraw import Console
+from datetime import datetime
 from time import sleep
 
-import consoledraw
+console = Console()
 
-console = consoledraw.Console()
+format = """
+    ╔══════════╗
+    ║ {} ║
+    ╚══════════╝
+"""
 
-x = 0
 while True:
     with console:
-        for i in range(23):
-            console.print("    |" + " " * round(abs(sin((x + i) * 0.05)) * 9.5) + "O") # Prints to the custom console's buffer (works the same as python's built-in print)
-    
-    x += 1
+        console.print(format.format(datetime.strftime(datetime.now(), "%H:%M:%S")))
 
-    sleep(1/60)
+    sleep(0.5)
 ```
-![Demo GIF](https://media0.giphy.com/media/gXfAUJAD8hHwBcJIFP/giphy.gif?cid=790b7611aab0b776e0e3796d1e0e0e60f7012fc4300d0b9e&rid=giphy.gif&ct=g)
+![Demo GIF](https://i.giphy.com/media/J5EEMFnL8K1oTneliV/giphy.webp)
 
 ```python
 with console:    

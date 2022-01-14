@@ -4,15 +4,17 @@ from copy import deepcopy
 from typing import Dict, List
 
 from .errors import ConsoleSizeError
-from .utils import set_cursor_visibility
+import consoledraw.utils as utils
 
 
 class Console:
-    def __init__(self, hide_cursor: bool = True) -> None:
+    def __init__(self, hide_cursor: bool = True, clear_screen: bool = True) -> None:
         self.__text: str = ""
         self.__grid_cache: Dict[os.terminal_size, List[List[str]]] = {}
 
-        set_cursor_visibility(not hide_cursor)
+        utils.set_cursor_visibility(not hide_cursor)
+        if clear_screen:
+            utils.clear_screen()
 
         self.update()
 
