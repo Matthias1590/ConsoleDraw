@@ -60,4 +60,4 @@ console.update()
 [![Downloads](https://pepy.tech/badge/consoledraw)](https://pepy.tech/project/consoledraw) [![Downloads](https://pepy.tech/badge/consoledraw/month)](https://pepy.tech/project/consoledraw) [![Downloads](https://pepy.tech/badge/consoledraw/week)](https://pepy.tech/project/consoledraw)
 
 # Supported Operating Systems
-The consoledraw module should be supported on Windows, Linux and Mac (although it has not been tested on Mac).
+The consoledraw module is supported on Windows, Linux and Mac.
