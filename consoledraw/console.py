@@ -16,10 +16,10 @@ class Console:
 
         self.update()
 
-    def __enter__(self) -> None:
+    def __enter__(self, *args, **kwargs) -> None:
         self.clear()
 
-    def __exit__(self) -> None:
+    def __exit__(self, *args, **kwargs) -> None:
         self.update()
 
     def __generate_grid(self) -> List[List[str]]:
