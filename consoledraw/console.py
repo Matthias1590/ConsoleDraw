@@ -62,7 +62,7 @@ class Console:
         "Clears the console's buffer."
 
         self.__text = ""
-        print(end="\033[0;0f")
+        utils.set_cursor_position(0, 0)
 
     def update(self) -> None:
         "Prints the console's buffer to the actual console."

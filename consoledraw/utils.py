@@ -4,18 +4,25 @@ import os
 if os.name == "nt":
     import ctypes
 
+    __console_handle = ctypes.windll.kernel32.GetStdHandle(-11)
+
     class _CursorInfo(ctypes.Structure):
         _fields_ = [("size", ctypes.c_int), ("visible", ctypes.c_byte)]
 
     def set_cursor_visibility(visible: bool) -> None:
         ci = _CursorInfo()
-        handle = ctypes.windll.kernel32.GetStdHandle(-11)
-        ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
+        ctypes.windll.kernel32.GetConsoleCursorInfo(__console_handle, ctypes.byref(ci))
         ci.visible = visible
-        ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
+        ctypes.windll.kernel32.SetConsoleCursorInfo(__console_handle, ctypes.byref(ci))
 
     def clear_screen() -> None:
         os.system("cls")
+
+    def set_cursor_position(x: int, y: int) -> None:
+        value = x + (y << 16)
+        ctypes.windll.kernel32.SetConsoleCursorPosition(
+            __console_handle, value
+        )
 
 
 else:
@@ -25,3 +32,6 @@ else:
 
     def clear_screen() -> None:
         print("\x1b[2J\x1b[H")
+
+    def set_cursor_position(x: int, y: int) -> None:
+        print(end=f"\033[{x};{y}f")
