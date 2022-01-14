@@ -1,0 +1,2 @@
+class ConsoleSizeError(Exception):
+    pass
