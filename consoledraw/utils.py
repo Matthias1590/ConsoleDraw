@@ -1,10 +1,10 @@
 import os
 
 
-if os.name == "nt":
+if os.name == "nt":  # Windows
     import ctypes
 
-    __console_handle = ctypes.windll.kernel32.GetStdHandle(-11)
+    __console_handle = ctypes.windll.kernel32.GetStdHandle(-11)  # STD_OUTPUT_HANDLE
 
     class _CursorInfo(ctypes.Structure):
         _fields_ = [("size", ctypes.c_int), ("visible", ctypes.c_byte)]
@@ -20,12 +20,10 @@ if os.name == "nt":
 
     def set_cursor_position(x: int, y: int) -> None:
         value = x + (y << 16)
-        ctypes.windll.kernel32.SetConsoleCursorPosition(
-            __console_handle, value
-        )
+        ctypes.windll.kernel32.SetConsoleCursorPosition(__console_handle, value)
 
 
-else:
+else:  # Linux and macOS
 
     def set_cursor_visibility(visible: bool) -> None:
         print("\x1b[?25h" if visible else "\x1b[?25l")
